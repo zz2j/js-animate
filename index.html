@@ -1,0 +1,49 @@
+<html>
+<head>
+<title>Cq Example</title>
+<style>
+
+  body { padding: 0; margin:0;font-family: "Lucida Console", Monaco, monospace;}
+  div { position: absolute; overflow: hidden; }
+  #container { border: 3px solid white; width: 500px; height: 500px; background-color: white;opacity: 0;z-index: 200}
+
+  #sun{width:100px;height: 103px;top:300px;left:50px;opacity: 0;z-index: 200}
+
+  #line_up{top:100px;left:550px;opacity: 0}
+  #line_down{top:300px;left:550px;opacity: 0}
+
+</style>
+</head>
+
+<body>
+<div id='container'>
+  <img src="./res/montain.jpg">
+</div>
+<div id='sun'>
+  <img src="./res/sun-sm.png">
+</div>
+<div id='line_up'>
+  <h1>the sun arise</h1>
+</div>
+<div id='line_down'>
+  <h1>the sun down</h1>
+</div>
+<br>
+
+<script src="zflash.js"></script>
+<script>
+var frame1 = zflash.sync(zflash.go(zflash.move('container',1000,{opacity:0},{opacity:1},'linear'),
+                        zflash.move('sun',2000,{top:200,opacity:0},{top:30,opacity:1},'linear')),
+                        zflash.move('line_up',3000,{opacity:0},{opacity:1},'easeIn'));
+
+var frame2 = zflash.go(frame1,zflash.move('sun',2000,{top:30,opacity:1},{top:200,opacity:0},'linear'));
+
+var frame3 = zflash.go(zflash.sleep(3000),zflash.move('line_down',3000,{opacity:0},{opacity:1},'easeOut'));
+
+var render = zflash.sync(frame2,frame3);
+
+// launch the animation
+zflash.render(10000);
+</script>
+</body>
+</html>
